@@ -1,0 +1,7 @@
+nlive:
+    image: "zhouweitong/nlive:latest"
+    ports:
+      - "80:80"
+      - "1935:1935"
+    volumes:
+      - nlive_dir:/nginx
