@@ -23,7 +23,7 @@ RUN mkdir nginx && \
 	cd html && \
 	mkdir hls hls/transcode dash dash/transcode vod record
 WORKDIR /nginx
-COPY nginx.conf ./conf/
+COPY conf/* ./conf/
 COPY html/* ./html/
 EXPOSE 80
 EXPOSE 1935
