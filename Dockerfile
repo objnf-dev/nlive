@@ -1,4 +1,5 @@
 FROM alpine:latest
+LABEL maintainer: xml@live.com
 ENV NGINX_VER=1.17.6
 RUN mkdir nginx && \
 	cd tmp && \
@@ -14,11 +15,16 @@ RUN mkdir nginx && \
 	make && \
 	make install && \
 	apk add --no-cache --virtual .ffmpeg ffmpeg && \
-	cd / && \
+	cd /nginx && \
 	rm -r /tmp/* && \
 	apk del .git && \
-	apk del .buildenv
-
+	apk del .buildenv && \
+	rm conf/nginx.conf && \
+	cd html && \
+	mkdir hls hls/transcode dash dash/transcode vod record
+WORKDIR /nginx
+COPY nginx.conf ./conf/
+COPY html/* ./html/
 EXPOSE 80
 EXPOSE 1935
 VOLUME [ "/nginx" ]
