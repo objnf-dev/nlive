@@ -30,4 +30,4 @@ RUN chmod +x ./start.sh
 EXPOSE 80
 EXPOSE 1935
 VOLUME [ "/nginx" ]
-CMD ["bash", "-c", "/nginx/start.sh"]
+CMD ["bash", "/nginx/start.sh"]
