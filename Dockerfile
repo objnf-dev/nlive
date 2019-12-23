@@ -4,17 +4,17 @@ ENV NGINX_VER=1.17.6
 RUN mkdir nginx && \
 	cd tmp && \
 	apk update && \
+	apk add --no-cache ffmpeg pcre-dev && \
 	apk add --no-cache --virtual .git git && \
 	wget http://nginx.org/download/nginx-$NGINX_VER.tar.gz && \
 	tar -xzf nginx-$NGINX_VER.tar.gz && \
 	git clone https://github.com/winshining/nginx-http-flv-module.git && \
 	apk add --no-cache --virtual .buildenv gcc libc-dev make linux-headers \
-	bash openssl-dev pcre-dev zlib-dev && \
+	bash openssl-dev zlib-dev && \
 	cd nginx-$NGINX_VER && \
 	./configure --prefix=/nginx --with-http_ssl_module --add-module=../nginx-http-flv-module && \
 	make && \
 	make install && \
-	apk add --no-cache --virtual .ffmpeg ffmpeg && \
 	cd /nginx && \
 	rm -r /tmp/* && \
 	apk del .git && \
