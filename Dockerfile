@@ -1,6 +1,6 @@
 FROM alpine:latest
 LABEL maintainer: xml@live.com
-ENV NGINX_VER=1.17.9
+ENV NGINX_VER=1.22.0
 RUN mkdir nginx && \
 	cd tmp && \
 	apk update && \
