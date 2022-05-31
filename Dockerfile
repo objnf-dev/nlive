@@ -21,13 +21,12 @@ RUN mkdir nginx && \
 	apk del .buildenv && \
 	rm conf/nginx.conf && \
 	cd html && \
-	mkdir hls hls/transcode dash dash/transcode vod record
+	mkdir hls hls/transcode dash dash/transcode vod record && \
+	chmod -R 777 ../html
 WORKDIR /nginx
 COPY conf/* ./conf/
 COPY html/* ./html/
-COPY start.sh .
-RUN chmod +x ./start.sh
 EXPOSE 80
 EXPOSE 1935
 VOLUME [ "/nginx" ]
-CMD ["bash", "/nginx/start.sh"]
+CMD ["/nginx/sbin/nginx", "-c", "/nginx/conf/nginx.conf"]
